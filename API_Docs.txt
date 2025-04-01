@@ -1,0 +1,124 @@
+=== Enterprise API Gateway Documentation ===
+Version 2.7.0 | RESTful Service Interface
+
+--- AUTHENTICATION REQUIREMENTS ---
+* Required for all endpoints except:
+  - /documentation
+  - /system-status
+  - /security.txt
+
+* Authorization Methods:
+  1. Query Parameter: ?api_key=<YOUR_KEY>
+  2. Header: X-API-KEY: <YOUR_KEY>
+
+* Key Types:
+  - ADMIN_MASTER_KEY (Privileged access)
+  - DEMO_123 [Disabled] - "Excessive usage"
+  - TEMP_456 [Expired] - "Security protocol violation"
+
+--- API ENDPOINTS ---
+
+GET /documentation
+Technical Specification Portal
+Response:
+{
+  "service": "Enterprise API Gateway",
+  "version": "2.7.0",
+  "authentication": {
+    "protocol": "OAuth 2.0 with HMAC verification",
+    "onboarding": [
+      "1. Submit access request form",
+      "2. Complete security clearance",
+      "3. Receive encrypted credentials"
+    ]
+  },
+  "description": "Core system integration endpoints"
+}
+
+GET /user-profile
+User Identity Service
+Admin-Level Response:
+{
+  "username": "SYSTEM_ADMIN",
+  "access_level": "PRIVILEGED",
+  "permissions": ["read", "write", "config"]
+}
+
+Standard Response:
+{
+  "username": "user_#A1B2C3",
+  "access_level": "BASIC",
+  "permissions": ["read"]
+}
+
+GET /system-status
+Operational Health Monitor
+{
+  "uptime": "99.98%",
+  "load_index": "0.75",
+  "message": "Operational within normal parameters"
+}
+
+GET /secure-access
+Privileged Operations Gateway
+{
+  "status": "access_restricted",
+  "authorization_required": "Admin credentials needed"
+}
+
+GET /security.txt
+Security Policy Interface
+User-agent: *
+Allow: /documentation
+Comment: Review documentation for access protocols
+
+--- ERROR CODES ---
+
+403 Forbidden:
+{
+  "error": "Authorization Required",
+  "code": "AUTH-1001",
+  "documentation": "/documentation#authentication"
+}
+
+401 Unauthorized:
+{
+  "error": "Invalid Credentials",
+  "code": "AUTH-1002",
+  "resolution": "Verify key or request new credentials"
+}
+
+404 Resource Not Found:
+{
+  "error": "Endpoint Unavailable",
+  "code": "RES-2001",
+  "documentation": "/documentation#endpoints"
+}
+
+--- COMPLIANCE STANDARDS ---
+* GDPR (General Data Protection Regulation)
+* HIPAA (Health Information Privacy)
+* ISO 27001 (Information Security)
+
+--- RATE LIMITING ---
+| Tier        | Requests/Minute |
+|-------------|------------------|
+| Standard    | 60               |
+| Enterprise  | 500              |
+
+--- GETTING STARTED ---
+1. Initialize service:
+   python api_gateway.py
+
+2. Example requests:
+   curl -H "X-API-KEY: ADMIN_MASTER_KEY" http://localhost:5002/user-profile
+   curl http://localhost:5002/system-status
+
+=== SECURITY NOTICE ===
+"All access credentials must be protected. 
+Report any security concerns immediately to:
+security@enterprise-api.com
+
+Unauthorized use prohibited. Activity monitored."
+
+© 2024 Enterprise API Solutions - All rights reserved
